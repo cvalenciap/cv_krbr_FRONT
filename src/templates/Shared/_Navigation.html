@@ -1,0 +1,33 @@
+﻿<div class="sidebar-background">
+    <div class="primary-sidebar-background"></div>
+</div>
+<div class="primary-sidebar">
+    <!-- Main nav -->
+    <ul class="nav navbar-collapse collapse navbar-collapse-primary">
+
+        <li class="dark-nav" ng-repeat="(key, item) in menuItems">
+            <span class="glow"></span>
+            <a ng-if="!item.items" ui-sref="{{item.name}}">
+                <i class="icon-{{item.data.icon}} icon-2x"></i>
+                <span>{{item.data.title}}</span>
+            </a>
+            <a ng-if="item.items" class="accordion-toggle" data-toggle="collapse" href="#menu-{{item.data.icon}}" target="_self">
+                <i class="icon-{{item.data.icon}} icon-2x"></i>
+                <span>{{item.data.title}} <i class="icon-caret-down"></i></span>
+            </a>
+            <ul ng-if="item.items" id="menu-{{item.data.icon}}" class="collapse" ng-class="{in: $state.includes(item.name)}">
+                <li ui-sref-active="active" ng-repeat="(subkey, subitem) in item.items">
+                    <a ui-sref="{{subitem.name}}"><i class="icon-{{subitem.data.icon}}"></i> {{subitem.data.title}}</a>
+                </li>
+            </ul>
+        </li>
+
+        <li ui-sref-active="active">
+            <span class="glow"></span>
+            <a ng-click="logout();">
+                <i class="icon-signout icon-2x"></i> Cerrar Sesión
+            </a>
+        </li>
+
+    </ul>
+</div>

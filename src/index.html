@@ -1,0 +1,56 @@
+﻿<!doctype html>
+<html lang="es" ng-app="KerberoWeb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>KERBERO | Sistema Integrado de Seguridad</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- STYLES -->
+  <link rel="stylesheet" type="text/css" href="css/template.css">
+  <!-- build:css css/main.min.css -->
+  <link rel="stylesheet" type="text/css" href="../src/css/goocss.css">
+  <link rel="stylesheet" type="text/css" href="../src/css/app.css">
+  <!-- endbuild -->
+
+</head>
+<body ng-controller="MasterCtrl as master">
+
+  <div ng-include src="'templates/Shared/_TopNavbar.html'" data-access-level='accessLevels.common'></div>
+  <!-- Page Wrapper -->
+  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper" data-access-level='accessLevels.common'><!--sidebar-wrapper-->
+    <!-- Navigation -->
+    <core-menu></core-menu>
+  </div>
+  <!--End Sidebar -->
+
+  <!--  Content Wrapper -->
+  <div id="content-wrapper">
+    <!-- Page Content -->
+
+    <div class="page-content">
+      <div class="main-content">
+
+        <!-- Title -->
+        <core-title data-access-level='accessLevels.common' ng-show="false"></core-title>
+
+        <!-- Breadcrumb line -->
+        <div ng-include src="'templates/Shared/_Breadcrumbs.html'" data-access-level='accessLevels.common'></div>
+
+        <!-- View -->
+        <div class="container" ui-view></div>
+      </div>
+    </div>
+    <!-- End Page Content -->
+  </div>
+</div>
+  <script type="text/javascript" src="env.js"></script>
+  <script type="text/javascript" src="js/vendor.js"></script>
+
+  <!-- Custom Scripts -->
+
+  <script type="text/javascript" src="js/application.min.js"></script>
+</body>
+</html>

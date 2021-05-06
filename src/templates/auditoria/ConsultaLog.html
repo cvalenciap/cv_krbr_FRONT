@@ -1,0 +1,126 @@
+<div data-ng-controller="ConsultaLogCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-search"></i>  Auditoría</span>
+                </div>
+                <div class="box-content">
+                    <form class="form-horizontal fill-up validatable">
+                        <div class="padded">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Sistema :</label>
+                                <div class="col-lg-4">
+                                    <select class="chzn-select form-control input-sm" ng-model="codSistema">
+                                        <option ng-value="0" selected="selected">TODOS</option>
+                                        <option ng-value="sistema.Codigo" ng-repeat="sistema in sistemas" >{{sistema.Codigo}}</option>
+                                    </select>
+                                </div>
+                            <!--/div>
+                            <div class="form-group"-->
+                                <label class="control-label col-lg-2">Usuario :</label>
+                                <div class="col-lg-4">
+                                    <select class="chzn-select form-control input-sm" ng-model="usuario">
+                                        <option ng-value="0" selected="selected">TODOS</option>
+                                        <option ng-value="usuario.Login" ng-repeat="usuario in usuarios" >{{usuario.Login}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Fecha Inicio :</label>
+
+                                <div class="col-lg-4">
+                                    <div>
+                                        <p class="input-group">
+                                            <input readonly="readonly" type="text" class="form-control"
+                                                   uib-datepicker-popup="{{format}}"
+                                                   ng-model="fechaInicioBus" is-open="popup1.opened"
+                                                   datepicker-options="dateOptions"
+                                                   ng-required="true" alt-input-formats="altInputFormats"
+                                                   show-button-bar="false" popup-placement="bottom" />
+                                              <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                                        class="glyphicon glyphicon-calendar"></i></button>
+                                              </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <label class="control-label col-lg-2">Fecha Final :</label>
+
+                                <div class="col-lg-3">
+                                    <div>
+                                        <p class="input-group">
+                                            <input readonly="readonly" type="text" class="form-control"
+                                                   uib-datepicker-popup="{{format}}"
+                                                   ng-model="fechaFinalBus" is-open="popup2.opened"
+                                                   datepicker-options="dateOptions"
+                                                   ng-required="true" alt-input-formats="altInputFormats"
+                                                   show-button-bar="false" popup-placement="bottom" showWeeks="false"/>
+                                          <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open2()"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                          </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1" style="text-align:right;">
+                                    <button type="button" class="btn btn-blue" ng-click="consultaLog()">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div class="form-actions" style="text-align:right;">
+                            <button type="button" class="btn btn-blue" ng-click="consultaLog()">Buscar</button>
+                        </div!-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <three-bounce-spinner ng-show="loading"></three-bounce-spinner>
+
+    <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+        <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+        <span ng-bind="alert.msg"></span>
+    </div>
+
+    <div class="row-fluid" ng-show="busquedaResult">
+        <div class="span12">
+            <div class="box">
+                <!--div class="box-header">
+                    <span class="title">Eventos</span>
+                </div-->
+                <div class="box-content">
+                    <div id="dataTables">
+                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" dt-instance="dtInstance" cellpadding="0" cellspacing="0" border="0" class="row-border hover" width="100%">
+                            <!--<thead>-->
+                            <!--<tr>-->
+                            <!--<th></th>-->
+                            <!--<th width="20%"><div>Fecha de Registro</div></th>-->
+                            <!--<th width="14%"><div>Sistema</div></th>-->
+                            <!--<th width="14%"><div>Usuario</div></th>-->
+                            <!--<th width="32%"><div>Descripción</div></th>-->
+                            <!--<th width="20%"><div>Origen</div></th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr ng-repeat="evento in result">-->
+                            <!--<td></td>-->
+                            <!--<td align="center">{{formatearFecha(evento.FechaCreacion)}}</td>-->
+                            <!--<td>{{evento.Sistema}}</td>-->
+                            <!--<td>{{evento.Usuario}}</td>-->
+                            <!--<td>{{evento.Descripcion}}</td>-->
+                            <!--<td>{{evento.Origen}}</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions" style="text-align:right;" ng-show = "busquedaResult">
+        <button type="button" class="btn btn-blue" ng-click="exportarExcel()">Exportar Excel</button>
+    </div>
+
+</div>

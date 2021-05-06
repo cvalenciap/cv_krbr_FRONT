@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="modalActivar.html">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+                    <h4 class="modal-title">Confirmar Acción</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 class="lead">¿Seguro que desea activar el/los elemento(s) seleccionado(s)?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">No</button>
+                    <a id="mensAct" class="btn btn-green" data-dismiss="modal" ng-click="cambiarEstado('0')">Si,
+                        Activar</a>
+                </div>
+            </div>
+</script>

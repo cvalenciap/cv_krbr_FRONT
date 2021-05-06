@@ -1,0 +1,21 @@
+<div class="container padded">
+    <div class="row">
+        <!-- Breadcrumb line -->
+        <div id="breadcrumbs">
+            <div class="breadcrumb-button blue">
+                <span class="breadcrumb-label"><i class="icon-home"></i> Inicio</span>
+                <span class="breadcrumb-arrow"><span></span></span>
+            </div>
+            <div class="breadcrumb-button" ng-show="title != 'Inicio'">
+                <span class="breadcrumb-label">
+                    <i class="icon-user" ng-class="'icon-'+icon"></i> {{title}}
+                </span>
+                <span class="breadcrumb-arrow"><span></span></span>
+            </div>
+            <div class="breadcrumb-button" ng-show="title != 'Inicio' && subtitle">
+                <span class="breadcrumb-label">{{subtitle}}</span>
+                <span class="breadcrumb-arrow"><span></span></span>
+            </div>
+        </div>
+    </div>
+</div>

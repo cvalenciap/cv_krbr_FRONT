@@ -1,0 +1,46 @@
+﻿<nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        
+        <a class="navbar-brand" href="#">KERBERO</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-primary">
+            <span class="sr-only">Mostrar menú principal</span>
+            <i class="icon-th-list"></i>
+        </button>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-top">
+            <span class="sr-only">Mostrar menú usuario</span>
+            <i class="icon-align-justify"></i>
+        </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-collapse-top">
+        <div class="navbar-right">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown" >
+                    <a href="" class="dropdown-toggle dropdown-avatar" data-toggle="dropdown" >
+                        <span>
+                            <img src="img/avatar.png" class="menu-avatar"> <span> {{user.username}}<i class="icon-caret-down"></i></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="with-image">
+                            <div class="avatar">
+                                <img src="img/avatar.png">
+                            </div>
+                            <span class="username">
+                                {{user.username}}
+                            </span>
+                            <small>
+                                <i class="icon-group"></i> {{user.perfil}}
+                            </small>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a ng-click="logout()"><i class="icon-off red"></i> <span>Cerrar Sesión</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div><!-- /.navbar-collapse -->
+</nav>
+

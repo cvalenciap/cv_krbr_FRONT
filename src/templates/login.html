@@ -1,0 +1,43 @@
+﻿<div class="login bg-light lt login-body" data-ng-controller="LoginKerberoCtrl">
+    <div class="login-background"></div>
+    <div class="col-lg-4 col-lg-offset-4">
+        <div class="login box">
+            <div class="box-header">
+                <span class="title">Iniciar Sesión</span>
+            </div>
+            <div class="box-content padded">
+                <div class="login-blur"></div>
+                <div class="login-brand text-center">
+                    <h1>Kerbero</h1>
+                </div>
+                <form class="separate-sections" novalidate ng-submit="login()">
+                    <div class="input-group addon-left">
+                    <span class="input-group-addon" href="#">
+                        <i class="icon-user"></i>
+                    </span>
+                        <input type="text" placeholder="Usuario" ng-model="user" requerid>
+                    </div>
+                    <div class="input-group addon-left">
+                    <span class="input-group-addon" href="#">
+                        <i class="icon-key"></i>
+                    </span>
+                        <input type="password" placeholder="Contraseña" ng-model="password" required>
+                    </div>
+                    <div vc-recaptcha ng-model="myRecaptchaResponse" theme="dark" on-create="onWidgetCreate(captchaWidgetId)"></div>
+                    <div>
+                        <button class="btn btn-gold btn-block" type="submit" id="login-button" ng-disabled="loginForm.$invalid">Ingresar <i class="icon-signin"></i></button>
+                    </div>
+                </form>
+
+                <div ng-show="loading" class="progress progress-striped active">
+                    <div class="progress-bar progress-black" style="width: 100%"></div>
+                </div>
+
+                <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+                    <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+                    <span ng-bind="alert.msg"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

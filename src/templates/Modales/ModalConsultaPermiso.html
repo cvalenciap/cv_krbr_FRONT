@@ -1,0 +1,145 @@
+<script type="text/ng-template" id="modalConsultaPermiso.html">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+                    <h6 id="modal-formLabel"><i class="icon-laptop"></i> Datos del Permiso</h6>
+                </div>
+                <div class="modal-body" style="height:500px; overflow-y:auto">
+                    <form class="form-horizontal fill-up separate-sections">
+                        <div class="accordion" id="accordion2">
+                            <div class="accordion-group">
+                                <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                    <a class="accordion-toggle" target="_self">
+                                        Información General
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="accordion-body collapse in">
+                                    <div class="accordion-inner padded">
+                                        <div class="form-group">
+                                            <label class="col-lg-3">ID :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="id" data-prompt-position="topLeft" placeholder="{{resultPermiso.Id}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Sistema :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="nombre" data-prompt-position="topLeft" placeholder="{{sistemaxPermiso.Nombre}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Código :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="codigo" data-prompt-position="topLeft" placeholder="{{resultPermiso.Codigo}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Nombre :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="nombre" data-prompt-position="topLeft" placeholder="{{resultPermiso.Nombre}}" disabled />
+                                            </div>
+                                        </div>
+                                        <!--div class="form-group">
+                                            <label class="col-lg-3">Valor :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="valor" data-prompt-position="topLeft" placeholder="{{resultPermiso.Valor}}" disabled />
+                                            </div>
+                                        </div-->
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Descripción :</label>
+                                            <div class="col-lg-9">
+                                                <textarea type="text" name="descripcion" data-prompt-position="topLeft" placeholder="{{resultPermiso.Descripcion}}" rows="3" disabled></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Estado :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="estado" data-prompt-position="topLeft" placeholder="{{obtenerEstado(resultPermiso.Estado)}}" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" target="_self">
+                                        Perfiles
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="accordion-body collapse">
+                                    <div class="accordion-inner padded">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <span class="title">Perfiles Asociados al Permiso</span>
+                                                <ul class="box-toolbar">
+                                                    <li><span class="label label-blue">{{perfilesxPermiso.length}}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="box-content">
+                                                <table class="table table-normal">
+                                                    <thead>
+                                                    <tr>
+                                                        <td width="20%">Estado</td>
+                                                        <td width="40%">Código</td>
+                                                        <td width="40%">Descripción</td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="perfil in perfilesxPermiso">
+                                                            <td class="{{obtenerClassTD(perfil.Estado)}}"><i class="{{obtenerClassI(perfil.Estado)}}"></i></td>
+                                                            <td>{{perfil.Codigo}}</td>
+                                                            <td>{{perfil.Descripcion}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree" target="_self">
+                                        Usuarios
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="accordion-body collapse">
+                                    <div class="accordion-inner padded">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <span class="title">Usuarios Asociados al Permiso</span>
+                                                <ul class="box-toolbar">
+                                                    <li><span class="label label-blue">{{usuariosxPermiso.length}}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="box-content">
+                                                <table class="table table-normal">
+                                                    <thead>
+                                                    <tr>
+                                                        <td width="20%">Estado</td>
+                                                        <td width="40%">Login</td>
+                                                        <td width="40%">Nombre</td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="usuario in usuariosxPermiso">
+                                                            <td class="{{obtenerClassTD(usuario.Estado)}}"><i class="{{obtenerClassI(usuario.Estado)}}"></i></td>
+                                                            <td>{{usuario.Login}}</td>
+                                                            <td>{{usuario.Nombre}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"><span></span></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cerrar</button>
+                </div>
+            </div>
+</script>

@@ -1,0 +1,254 @@
+<div data-ng-controller="CrearUsuarioCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-edit"></i>  Crear/Editar Usuario</span>
+                </div>
+                <div class="box-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav nav-tabs nav-tabs-left">
+                                <li class="active"><a href="#datosUsr" data-toggle="tab" target="_self"><i class="icon-dashboard"></i>
+                                    <span>Datos</span></a></li>
+                                <li><a href="#permisosUsr" data-toggle="tab" target="_self"><i class="icon-key"></i>
+                                    <span>Permisos</span></a></li>
+                                <li><a href="#perfilesUsr" data-toggle="tab" target="_self"><i class="icon-group"></i>
+                                    <span>Perfiles</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="box-content padded">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="datosUsr">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable" name="Datos">
+                                            <div class="padded">
+                                                <div class="form-group" ng-show="edicionUsuario">
+                                                    <label class="control-label col-lg-2">ID :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="idCre"
+                                                               uppercase-only disabled/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Apellido Paterno :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="apPaCre"
+                                                               uppercase-only
+                                                               onKeyPress="if(this.value.length==50) return false;" maxlength="50"/>
+                                                    </div>
+                                                    <label class="control-label col-lg-2">Apellido Materno :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="apMaCre"
+                                                               uppercase-only
+                                                               onKeyPress="if(this.value.length==50) return false;" maxlength="50"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Nombre (*):</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="nombreCre"
+                                                               uppercase-only required
+                                                               onKeyPress="if(this.value.length==100) return false;" maxlength="100"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Login (*):</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="loginCre"
+                                                               uppercase-only required
+                                                               onKeyPress="if(this.value.length==20) return false;" maxlength="20"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="creacionUsuario">
+                                                    <label class="control-label col-lg-2">Contraseña (*):</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="password" class="validate[required]"
+                                                               data-prompt-position="topLeft" ng-model="password" ng-required = "creacionUsuario"
+                                                               onKeyPress="if(this.value.length==12) return false;" maxlength="12"/>
+                                                    </div>
+                                                    <label class="control-label col-lg-2">Confirmar Contraseña (*):</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="password" class="validate[required]"
+                                                               data-prompt-position="topLeft" ng-model="passwordConf" ng-required = "creacionUsuario"
+                                                               onKeyPress="if(this.value.length==12) return false;" maxlength="12"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="edicionUsuario">
+                                                    <label class="control-label col-lg-2">Contraseña Nueva:</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="password" class="validate[required]"
+                                                               data-prompt-position="topLeft" ng-model="passwordNew"
+                                                               onKeyPress="if(this.value.length==12) return false;" maxlength="12"/>
+                                                    </div>
+                                                    <label class="control-label col-lg-2">Confirmar Contraseña Nueva:</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="password" class="validate[required]"
+                                                               data-prompt-position="topLeft" ng-model="passwordConfNew"
+                                                               onKeyPress="if(this.value.length==12) return false;" maxlength="12"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Correo :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="correoCre"
+                                                               uppercase-only
+                                                               onKeyPress="if(this.value.length==50) return false;" maxlength="50"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Estado :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <select class="chzn-select form-control input-sm"
+                                                                ng-model="estadoCre" id="cboEstado">
+                                                            <option value="0">ACTIVO</option>
+                                                            <option value="-1">BLOQUEADO</option>
+                                                            <option value="-2">ELIMINADO</option>
+                                                        </select>
+                                                    </div>
+                                                    <label class="control-label col-lg-2">Fecha de Caducidad :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <div>
+                                                            <p class="input-group">
+                                                                <input readonly="readonly" type="text"
+                                                                       class="form-control"
+                                                                       uib-datepicker-popup="{{format}}"
+                                                                       ng-model="fechCadCre" is-open="popup1.opened"
+                                                                       datepicker-options="dateOptions"
+                                                                       ng-required="true"
+                                                                       alt-input-formats="altInputFormats"
+                                                                       show-button-bar="false"
+                                                                       popup-placement="bottom"/>
+                                                                  <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                                                            class="glyphicon glyphicon-calendar"></i></button>
+                                                                  </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Horarios :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <a data-toggle="modal" href="#modal-form" target="_self" class="btn btn btn-gold" style="width:100%"><i class="icon-calendar"></i> Editar Horarios de Acceso</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="permisosUsr">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable">
+                                            <div class="padded">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label>Sistema: </label>
+                                                        <span class="help-block note"><i
+                                                                class="icon-exclamation-sign"></i> Seleccione el sistema sobre el cual asignar permisos al usuario</span>
+                                                        <select class="chzn-select form-control input-sm"
+                                                                ng-model="idSistemaPerm" ng-change="obtenerPermisos()">
+                                                            <option value="{{sistemaPerm.Id}}"
+                                                                    ng-repeat="sistemaPerm in sistemasPerm">{{sistemaPerm.Nombre}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Permisos Asignados:</label>
+                                                    <span class="help-block note"><i class="icon-exclamation-sign"></i> Seleccione los permisos del usuario</span>
+                                                    <select id="selectPermiso" multiple chosen ng-model="permiso" ng-change = "setearPermisos()"
+                                                            no-results-text="'No tiene ningun permiso para el sistema'"
+                                                            placeholder-text-multiple="'Seleccione un permiso'"
+                                                            ng-options="perm.Id as perm.Id+'.'+perm.Codigo+'-'+perm.Nombre for perm in permisos">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="perfilesUsr">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable">
+                                            <div class="padded">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label>Sistema: </label>
+                                                        <span class="help-block note"><i
+                                                                class="icon-exclamation-sign"></i> Seleccione el sistema sobre el cual asignar perfiles al usuario</span>
+                                                        <select class="chzn-select form-control input-sm"
+                                                                ng-model="idSistemaPerf" ng-change="obtenerPerfiles()">
+                                                            <option value="{{sistemaPerf.Id}}"
+                                                                    ng-repeat="sistemaPerf in sistemasPerf">{{sistemaPerf.Nombre}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Perfiles Asignados:</label>
+                                                    <span class="help-block note"><i class="icon-exclamation-sign"></i> Seleccione los perfiles del usuario</span>
+                                                    <select id="selectPerfil" multiple chosen ng-model="perfil" ng-change = "setearPerfiles()"
+                                                            no-results-text="'No tiene ningun perfil para el sistema'"
+                                                            placeholder-text-multiple="'Seleccione un perfil'"
+                                                            ng-options="perf.Id as perf.Id+'.'+perf.Codigo+'-'+perf.Nombre for perf in perfiles">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <three-bounce-spinner ng-show="loading"></three-bounce-spinner>
+
+                <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+                    <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+                    <span ng-bind="alert.msg"></span>
+                </div>
+
+                <div class="form-actions" align="right">
+                    <button type="button" class="btn btn-default" ui-sref="common.usuarios.buscar">Regresar
+                    </button>
+                    <button ng-show="creacionUsuario" type="button" class="btn btn-green" ng-disabled="Datos.$invalid"
+                            ng-click="crearUsuario()">Grabar
+                    </button>
+                    <button ng-show="edicionUsuario" type="button" class="btn btn-green" ng-disabled="Datos.$invalid"
+                            ng-click="editarUsuario()">Grabar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-include src="'templates/Modales/ModalHorario.html'" data-access-level='accessLevels.common'></div>
+</div>

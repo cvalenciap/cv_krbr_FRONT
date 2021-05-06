@@ -1,0 +1,174 @@
+<div data-ng-controller="CrearPerfilCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-edit"></i>  Crear/Editar Perfil</span>
+                </div>
+                <div class="box-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav nav-tabs nav-tabs-left">
+                                <li class="active"><a href="#datosPer" data-toggle="tab" target="_self"><i
+                                        class="icon-dashboard"></i> <span>Datos</span></a></li>
+                                <li><a href="#permisosPer" data-toggle="tab" target="_self"
+                                       ng-click="obtenerPermisos()"><i class="icon-key"></i> <span>Permisos</span></a>
+                                </li>
+                                <li><a href="#usuariosPer" data-toggle="tab" target="_self"><i class="icon-user"></i>
+                                    <span>Usuarios</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="box-content padded">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="datosPer">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable" name="Datos">
+                                            <div class="padded">
+                                                <div class="form-group" ng-show="edicionPerfil">
+                                                    <label class="control-label col-lg-2">Identificador :</label>
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="idCre"
+                                                               uppercase-only disabled/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Sistema (*):</label>
+                                                    <div class="col-lg-4">
+                                                        <select class="chzn-select form-control input-sm"
+                                                                ng-model="idSistema" required ng-disabled = "edicionPerfil" ng-change="obtenerNombreSistema(idSistema)">
+                                                            <option value="{{sistema.Id}}"
+                                                                    ng-repeat="sistema in sistemas">{{sistema.Nombre}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Código (*):</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="codigoCre"
+                                                               uppercase-only required
+                                                               onKeyPress="if(this.value.length==10) return false;" maxlength="10"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Nombre (*):</label>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="nombreCre"
+                                                               uppercase-only required
+                                                               onKeyPress="if(this.value.length==100) return false;" maxlength="100"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Descripción :</label>
+
+                                                    <div class="col-lg-10">
+                                                        <textarea type="text"
+                                                                  class="form-control input-sm validate [required]"
+                                                                  data-prompt-position="topLeft" rows="3"
+                                                                  ng-model="descripcionCre"
+                                                                  uppercase-only
+                                                                  onKeyPress="if(this.value.length==400) return false;" maxlength="400"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Estado :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <select class="chzn-select form-control input-sm"
+                                                                ng-model="estadoCre" id="cboEstado">
+                                                            <option value="0">ACTIVO</option>
+                                                            <option value="-1">BLOQUEADO</option>
+                                                            <option value="-2">ELIMINADO</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Horarios :</label>
+
+                                                    <div class="col-lg-4">
+                                                        <a data-toggle="modal" href="#modal-form" target="_self" class="btn btn btn-gold" style="width:100%"><i class="icon-calendar"></i> Editar Horarios de Acceso</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="permisosPer">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable">
+                                            <div class="padded">
+                                                <div class="form-group">
+                                                    <div><label>Sistema: </label>
+                                                        <input type="text"
+                                                               class="form-control input-sm validate [required]"
+                                                               data-prompt-position="topLeft" ng-model="nombreSistema"
+                                                               disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Permisos Asignados:</label>
+                                                    <span class="help-block note"><i class="icon-exclamation-sign"></i> Seleccione los permisos del sistema</span>
+                                                    <select id="selectPermiso" multiple chosen ng-model="permiso"
+                                                            no-results-text="'No existe ningun permiso para el sistema'"
+                                                            placeholder-text-multiple="'Seleccione un permiso'"
+                                                            ng-options="perm.Id as perm.Id+'.'+perm.Codigo+'-'+perm.Nombre for perm in permisos">
+                                                        <!--<option value="{{permiso.Id}}">{{permiso.Id+'.'+permiso.Codigo+'-'+permiso.Nombre}}</option>-->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="usuariosPer">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable">
+                                            <div class="padded">
+                                                <div class="form-group">
+                                                    <label>Usuarios Asignados:</label>
+                                                    <span class="help-block note"><i class="icon-exclamation-sign"></i> Seleccione los usuarios del perfil</span>
+                                                    <select multiple chosen ng-model="usuario"
+                                                            no-results-text="'No existen usuarios'"
+                                                            placeholder-text-multiple="'Seleccione un usuario'"
+                                                            ng-options="user.Id as user.Id+'.'+user.Login+'-'+user.NombreCompleto for user in usuarios">
+                                                        <!--<option value="{{permiso.Id}}">{{permiso.Id+'.'+permiso.Codigo+'-'+permiso.Nombre}}</option>-->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <three-bounce-spinner ng-show="loading"></three-bounce-spinner>
+
+                <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+                    <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+                    <span ng-bind="alert.msg"></span>
+                </div>
+
+                <div class="form-actions" align="right">
+                    <button type="button" class="btn btn-default" ui-sref="common.perfiles.buscar">Regresar
+                    </button>
+                    <button ng-show="creacionPerfil" type="button" class="btn btn-green" ng-disabled="Datos.$invalid"
+                            ng-click="crearPerfil()">Grabar
+                    </button>
+                    <button ng-show="edicionPerfil" type="button" class="btn btn-green" ng-disabled="Datos.$invalid"
+                            ng-click="editarPerfil()">Grabar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include src="'templates/Modales/ModalHorario.html'" data-access-level='accessLevels.common'></div>
+</div>

@@ -1,0 +1,81 @@
+<div data-ng-controller = "CrearParametroCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-edit"></i>  Crear/Editar Parametro</span>
+                </div>
+                <div class="box-content">
+                    <div class="box">
+                        <div class="box-header">
+                            <ul class="nav nav-tabs nav-tabs-left">
+                                <li class="active"><a href="#datosParam" data-toggle="tab" target = "_self"><i class="icon-dashboard"></i> <span>Datos</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="box-content padded">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="datosParam">
+                                    <div class="box-content">
+                                        <form class="form-horizontal fill-up validatable" name="Datos">
+                                            <div class="padded">
+                                                <div class="form-group" ng-show="edicionParametro">
+                                                    <label class="control-label col-lg-2">ID :</label>
+                                                    <div class="col-lg-4">
+                                                        <input type="text" class="form-control input-sm validate [required]" data-prompt-position="topLeft" ng-model="idCre" uppercase-only disabled/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Código :</label>
+                                                    <div class="col-lg-4">
+                                                        <input type="text" class="form-control input-sm" data-prompt-position="topLeft" ng-model="codigoCre" uppercase-only onKeyPress="if(this.value.length==10) return false;" maxlength="10"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Nombre Valor (*):</label>
+                                                    <div class="col-lg-4">
+                                                        <input type="text" class="form-control input-sm validate [required]" data-prompt-position="topLeft" ng-model="nombreValorCre" uppercase-only required onKeyPress="if(this.value.length==100) return false;" maxlength="100"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Param Padre :</label>
+                                                    <div class="col-lg-4">
+                                                        <select class="chzn-select form-control input-sm" ng-model="paramPadreCre" required>
+                                                            <option ng-value="parametro.Id" ng-repeat="parametro in parametros" >{{parametro.Valor}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">Estado :</label>
+                                                    <div class="col-lg-4">
+                                                        <select class="chzn-select form-control input-sm" ng-model="estadoCre" id="cboEstado">
+                                                            <option value="0">ACTIVO</option>
+                                                            <option value="-1">BLOQUEADO</option>
+                                                            <option value="-2">ELIMINADO</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <three-bounce-spinner ng-show="loading"></three-bounce-spinner>
+
+                <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+                    <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+                    <span ng-bind="alert.msg"></span>
+                </div>
+
+                <div class="form-actions" align="right">
+                    <button type="button" class="btn btn-default" ui-sref="common.parametros.buscar">Regresar</button>
+                    <button ng-show="creacionParametro" type="button" class="btn btn-green" ng-disabled="Datos.$invalid" ng-click="crearParametro()">Grabar</button>
+                    <button ng-show="edicionParametro" type="button" class="btn btn-green" ng-disabled="Datos.$invalid" ng-click="editarParametro()">Grabar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

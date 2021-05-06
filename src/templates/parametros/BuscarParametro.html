@@ -1,0 +1,102 @@
+<div data-ng-controller="BuscarParametroCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-search"></i>  Búsqueda de Parámetros</span>
+                    <ul class="box-toolbar" >
+                        <li class="toolbar-link" ng-show="muestraCrear">
+                            <a ui-sref="common.parametros.crear">
+                                <i class="status-info icon-edit"></i> Crear Parametro
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-content">
+                    <form class="form-horizontal fill-up validatable">
+                        <div class="padded">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Parámetro Padre :</label>
+                                <div class="col-lg-3">
+                                    <input type="text" class="form-control input-sm" data-prompt-position="topLeft" ng-model="paramPadreBus" uppercase-only/>
+                                </div>
+                            <!--/div>
+                            <div class="form-group"-->
+                                <label class="control-label col-lg-2">Estado :</label>
+                                <div class="col-lg-3">
+                                    <select class="chzn-select form-control input-sm" ng-model="estadoBus">
+                                        <option value="0,-1">TODOS</option>
+                                        <option value="0">ACTIVO</option>
+                                        <option value="-1">BLOQUEADO</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2" style="text-align:right;">
+                                    <button type="button" class="btn btn-blue" ng-click="busquedaParametro()">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div class="form-actions" style="text-align:right;">
+                            <button type="button" class="btn btn-blue" ng-click="busquedaParametro()">Buscar</button>
+                        </div!-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <three-bounce-spinner ng-show="loading"></three-bounce-spinner>
+
+    <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+        <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+        <span ng-bind="alert.msg"></span>
+    </div>
+
+    <div class="row-fluid" ng-show="busquedaResult">
+        <div class="span12" ng-show="haveResult">
+            <div class="box">
+                <!--div class="box-header">
+                    <span class="title">Parámetros</span>
+                </div-->
+                <div class="box-content">
+                    <div id="dataTables">
+                        <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" cellpadding="0" cellspacing="0" border="0" class="row-border hover" id ="prueba" width="100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th width="3%"></th>
+                                <th width="7%"><div>ID </div></th>
+                                <th width="18%"><div>Código</div></th>
+                                <th width="22%"><div>Nombre Parámetro</div></th>
+                                <th width="28%"><div>Parámetro Padre</div></th>
+                                <th width="22%"><div>Fecha de Registro</div></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="parametro in result">
+                                <td></td>
+                                <td>
+                                    <div class="btn-group" ng-click="bloquearPadre(parametro.ValorPadre)">
+                                        <button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a data-toggle="modal" data-ng-click="openConsultaModal(parametro.Id)"><i class="icon-eye-open"></i> Ver Detalle</a></li>
+                                            <li ng-show="muestraEditar"><a ui-sref="common.parametros.editar({idParametro: '{{parametro.Id}}'})"><i class="icon-edit"></i> Editar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td align="center">{{parametro.Id}}</td>
+                                <td><a data-toggle="modal" data-ng-click="openConsultaModal(parametro.Id)">{{parametro.Codigo}}</a></td>
+                                <td>{{parametro.Valor}}</td>
+                                <td>{{parametro.ValorPadre}}</td>
+                                <td align="center">{{parametro.FechaRegistro}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include src="'templates/Modales/ModalConsultaParametro.html'" data-access-level='accessLevels.common'></div>
+
+</div>

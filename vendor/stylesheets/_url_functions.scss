@@ -1,0 +1,14 @@
+//
+// Implementación de las funciones para rutas de fuentes e imágenes de acuerdo a Ruby
+//
+@import "variables";
+
+// ruta de imagen
+@function image-url($file) {
+  @return url($image-path + $file);
+}
+
+// ruta de fuente
+@function font-url($file) {
+  @return url($font-path + $file);
+}

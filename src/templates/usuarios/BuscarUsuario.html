@@ -1,0 +1,142 @@
+<div data-ng-controller="BuscarUsuarioCtrl">
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <span class="title"><i class="icon-search"></i>  Búsqueda de Usuarios</span>
+                <ul class="box-toolbar">
+                    <li class="toolbar-link" ng-show="muestraCrear">
+                        <a ui-sref="common.usuarios.crear">
+                        <i class="status-info icon-edit"></i> Crear Usuario
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-content">
+                <form class="form-horizontal fill-up validatable">
+                    <div class="padded">
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Apellido Paterno :</label>
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control input-sm" data-prompt-position="topLeft" ng-model="apPaterno" uppercase-only/>
+                            </div>
+                        <!--/div>
+                        <div class="form-group"-->
+                            <label class="control-label col-lg-2">Apellido Materno :</label>
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control input-sm" data-prompt-position="topLeft" ng-model="apMaterno" uppercase-only/>
+                            </div>
+                        <!--/div>
+                        <div class="form-group"-->
+                            <label class="control-label col-lg-2">Nombre :</label>
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control input-sm" data-prompt-position="topLeft" ng-model="nombreBus" uppercase-only/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Login :</label>
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control input-sm" data-prompt-position="topLeft" ng-model="loginBus" uppercase-only/>
+                            </div>
+                        <!--/div>
+                        <div class="form-group"-->
+                            <label class="control-label col-lg-2">Estado :</label>
+                            <div class="col-lg-2">
+                                <select class="chzn-select form-control input-sm" ng-model="estadoBus">
+                                    <option value="0,-1,-2">TODOS</option>
+                                    <option value="0">ACTIVO</option>
+                                    <option value="-1">BLOQUEADO</option>
+                                    <option value="-2">ELIMINADO</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4" style="text-align:right;">
+                                <button type="button" class="btn btn-blue" ng-click="busquedaUsuario()">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--div class="form-actions" style="text-align:right;">
+                        <button type="button" class="btn btn-blue" ng-click="busquedaUsuario()">Buscar</button>
+                    </div-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <three-bounce-spinner ng-show="loading"></three-bounce-spinner>
+
+    <div ng-repeat="alert in alerts" class="alert" ng-class="'alert-' + (alert.type || 'warning')">
+        <button type="button" class="close" ng-click="closeErrorAlert($index)">×</button>
+        <span ng-bind="alert.msg"></span>
+    </div>
+
+    <div class="row-fluid" ng-show="busquedaResult">
+        <div class="span12">
+        <div class="box">
+            <!--div class="box-header">
+                <span class="title">Usuarios</span>
+            </div-->
+            <div class="box-content">
+                <div id="dataTables">
+                    <!--<table dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" cellpadding="0" cellspacing="0" border="0" class="row-border hover" >-->
+                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" dt-instance="dtInstance" cellpadding="0" cellspacing="0" border="0" class="row-border hover"></table>
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th></th>-->
+                            <!--<th width="3%" ng-show="ActionMultiple">-->
+                                <!--<div class="btn-group">-->
+                                    <!--<button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-check"></i></button>-->
+                                    <!--<ul class="dropdown-menu">-->
+                                        <!--<li ng-show="muestraActBloq"><a data-toggle="modal" data-ng-click="getValue('Activar')" value="Get"><i class="icon-ok"></i> Activar</a></li>-->
+                                        <!--<li ng-show="muestraActBloq"><a data-toggle="modal" data-ng-click="getValue('Bloquear')" value="Get"><i class="icon-ban-circle"></i> Bloquear</a></li>-->
+                                        <!--<li class="divider"></li>-->
+                                        <!--<li ng-show="muestraEliminar"><a data-toggle="modal" data-ng-click="getValue('Eliminar')" value="Get"><i class="icon-trash"></i> Eliminar</a></li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</th>-->
+                            <!--<th width="3%"></th>-->
+                            <!--<th width="7%"><div>ID </div></th>-->
+                            <!--<th width="15%"><div>Login</div></th>-->
+                            <!--<th width="25%"><div>Nombre Completo</div></th>-->
+                            <!--<th width="17%"><div>Fecha de Caducidad</div></th>-->
+                            <!--<th width="13%"><div>Estado</div></th>-->
+                            <!--<th width="17%"><div>Fecha de Registro</div></th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr ng-repeat="usuario in result">-->
+                            <!--<td></td>-->
+                            <!--<td ng-show="ActionMultiple"><input type="checkbox" class="icheck" id="chkPermiso_{{usuario.Id}}" ng-model="usuario.selected"></td>-->
+                            <!--<td>-->
+                                <!--<div class="btn-group">-->
+                                    <!--<button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i></button>-->
+                                    <!--<ul class="dropdown-menu">-->
+                                        <!--<li><a data-toggle="modal" data-ng-click="openConsultaModal(usuario.Id)"><i class="icon-eye-open"></i> Ver Detalle</a></li>-->
+                                        <!--<li ng-show="muestraActBloq"><a data-toggle="modal" data-ng-click="openUniModal(usuario.Id, getOption(usuario.Estado).nombre)" ><i class="{{getOption(usuario.Estado).icon}}"></i> {{getOption(usuario.Estado).nombre}}</a></li>-->
+                                        <!--<li ng-show="muestraEditar"><a ui-sref="common.usuarios.editar({idUsuario: '{{usuario.Id}}'})"><i class="icon-edit"></i> Editar</a></li>&lt;!&ndash;href="@Url.Action("CrearSistema")"&ndash;&gt;-->
+                                        <!--<li ng-show="muestraEliminar" class="divider"></li>-->
+                                        <!--<li ng-show="muestraEliminar"><a data-toggle="modal" data-ng-click="openUniModal(usuario.Id, 'Eliminar')"><i ng-click="" class="icon-trash"></i> Eliminar</a></li> &lt;!&ndash;data-toggle="modal" ng-href="#modal-eliminar"&ndash;&gt;-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                            <!--<td align="center">{{usuario.Id}}</td>-->
+                            <!--<td><a data-toggle="modal" data-ng-click="openConsultaModal(usuario.Id)">{{usuario.Login}}</a></td>-->
+                            <!--<td>{{usuario.NombreCompleto}}</td>-->
+                            <!--<td align="center">{{usuario.FechaCaducidad}}</td>-->
+                            <!--<td align="center">{{getEstado(usuario.Estado)}}</td>-->
+                            <!--<td align="center">{{usuario.FechaRegistro}}</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div ng-include src="'templates/Modales/ModalEliminar.html'" data-access-level='accessLevels.common'></div>
+    <div ng-include src="'templates/Modales/ModalActivar.html'" data-access-level='accessLevels.common'></div>
+    <div ng-include src="'templates/Modales/ModalBloquear.html'" data-access-level='accessLevels.common'></div>
+    <div ng-include src="'templates/Modales/ModalConsultaUsuario.html'" data-access-level='accessLevels.common'></div>
+</div>

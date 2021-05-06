@@ -1,0 +1,174 @@
+<script type="text/ng-template" id="modalConsultaPerfil.html">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+                    <h6 id="modal-formLabel"><i class="icon-laptop"></i> Datos del Perfil</h6>
+                </div>
+                <div class="modal-body" style="height:500px; overflow-y:auto">
+                    <form class="form-horizontal fill-up separate-sections">
+                        <div class="accordion" id="accordion2">
+                            <div class="accordion-group">
+                                <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                    <a class="accordion-toggle" target="_self">
+                                        Información General
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="accordion-body collapse in">
+                                    <div class="accordion-inner padded">
+                                        <div class="form-group">
+                                            <label class="col-lg-3">ID :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="id" data-prompt-position="topLeft" placeholder="{{resultPerfil.Id}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Sistema :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="nombre" data-prompt-position="topLeft" placeholder="{{sistemaxPerfil.Nombre}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Código :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="codigo" data-prompt-position="topLeft" placeholder="{{resultPerfil.Codigo}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Nombre :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="nombre" data-prompt-position="topLeft" placeholder="{{resultPerfil.Nombre}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Descripción :</label>
+                                            <div class="col-lg-9">
+                                                <textarea type="text" name="descripcion" data-prompt-position="topLeft" placeholder="{{resultPerfil.Descripcion}}" rows="3" disabled></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Estado :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="estado" data-prompt-position="topLeft" placeholder="{{obtenerEstado(resultPerfil.Estado)}}" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" target="_self">
+                                        Permisos
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="accordion-body collapse">
+                                    <div class="accordion-inner padded">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <span class="title">Permisos Asociados al Perfil</span>
+                                                <ul class="box-toolbar">
+                                                    <li><span class="label label-blue">{{permisosxPerfil.length}}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="box-content">
+                                                <table class="table table-normal">
+                                                    <thead>
+                                                    <tr>
+                                                        <td width="20%">Estado</td>
+                                                        <td width="40%">Código</td>
+                                                        <td width="40%">Descripción</td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="permiso in permisosxPerfil">
+                                                            <td id="td_perm_{{permiso.Id}}" ng-bind="obtenerTD('td_perm_' + permiso.Id, permiso.Estado)"></td>
+                                                            <td>{{permiso.Codigo}}</td>
+                                                            <td>{{permiso.Descripcion}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree" target="_self">
+                                        Usuarios
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="accordion-body collapse">
+                                    <div class="accordion-inner padded">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <span class="title">Usuarios Asociados al Perfil</span>
+                                                <ul class="box-toolbar">
+                                                    <li><span class="label label-blue">{{usuariosxPerfil.length}}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="box-content">
+                                                <table class="table table-normal">
+                                                    <thead>
+                                                    <tr>
+                                                        <td width="20%">Estado</td>
+                                                        <td width="40%">Login</td>
+                                                        <td width="40%">Nombre</td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="usuario in usuariosxPerfil">
+                                                            <td id="td_user_{{usuario.Id}}" ng-bind="obtenerTD('td_user_' + usuario.Id, usuario.Estado)"></td>
+                                                            <td>{{usuario.Login}}</td>
+                                                            <td>{{usuario.Nombre}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour" target="_self">
+                                        Horarios
+                                    </a>
+                                </div>
+                                <div id="collapseFour" class="accordion-body collapse">
+                                    <div class="accordion-inner padded">
+                                        <div class="box">
+                                            <div class="box-header">
+                                                <span class="title">Horarios de Acceso del Perfil</span>
+                                            </div>
+                                            <div class="box-content">
+                                                <table class="table table-normal">
+                                                    <thead>
+                                                    <tr>
+                                                        <td width="30%"></td>
+                                                        <td width="10%">L</td>
+                                                        <td width="10%">M</td>
+                                                        <td width="10%">MI</td>
+                                                        <td width="10%">J</td>
+                                                        <td width="10%">V</td>
+                                                        <td width="10%">S</td>
+                                                        <td width="10%">D</td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="horarios">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"><span></span></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cerrar</button>
+                </div>
+            </div>
+</script>

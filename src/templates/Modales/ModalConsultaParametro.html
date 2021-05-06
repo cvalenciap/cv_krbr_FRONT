@@ -1,0 +1,59 @@
+<script type="text/ng-template" id="modalConsultaParametro.html">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+                    <h6 id="modal-formLabel"><i class="icon-laptop"></i> Datos del Parámetro</h6>
+                </div>
+                <div class="modal-body" style="height:500px; overflow-y:auto">
+                    <form class="form-horizontal fill-up separate-sections">
+                        <div class="accordion" id="accordion2">
+                            <div class="accordion-group">
+                                <div class="accordion-heading" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                    <a class="accordion-toggle" target="_self">
+                                        Información General
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="accordion-body collapse in">
+                                    <div class="accordion-inner padded">
+                                        <div class="form-group">
+                                            <label class="col-lg-3">ID :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="id" data-prompt-position="topLeft" placeholder="{{resultParametro.Id}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Código :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="nombre" data-prompt-position="topLeft" placeholder="{{resultParametro.Codigo}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Nombre Valor :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="codigo" data-prompt-position="topLeft" placeholder="{{resultParametro.Valor}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Parámetro Padre :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="nombre" data-prompt-position="topLeft" placeholder="{{resultParametro.ValorPadre}}" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3">Estado :</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" name="estado" data-prompt-position="topLeft" placeholder="{{obtenerEstado(resultParametro.Estado)}}" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"><span></span></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cerrar</button>
+                </div>
+            </div>
+</script>
